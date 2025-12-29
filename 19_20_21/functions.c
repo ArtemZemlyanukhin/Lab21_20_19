@@ -34,15 +34,15 @@ int fill_arr_random(employee_t* employees, int size) {
 
     srand(time(NULL));
 
-    const char* firstNames[] = { " Артём", "Михаил", "Дмитрий", "Роман", "Василий",
-                               "Мария", "Полина", "Элизавета", "Ольга", "Екатерина" };
-    const char* lastNames[] = { "Когтин", "Васин", "Молчунова", "Борисова", "Душков",
-                              "Куратов", "Арбузов", "Поздняков", "Шевченко", "Малых" };
-    const char* patronymics[] = { "Олегович", "Викторович", "Владимировна", "Игоревна", "Никитич",
-                                "Максимович", "Дмитриевич", "Васильевна", "Эдуардович" };
-    const char* positions[] = { "Менеджер", "Программист", "Бухгалтер", "Дизайнер",
-                              "Аналитик", "Тестировщик", "Администратор", "Директор",
-                              "Маркетолог", "Консультант" };
+    const char* firstNames[] = { " РђСЂС‚С‘Рј", "РњРёС…Р°РёР»", "Р”РјРёС‚СЂРёР№", "Р РѕРјР°РЅ", "Р’Р°СЃРёР»РёР№",
+                               "РњР°СЂРёСЏ", "РџРѕР»РёРЅР°", "Р­Р»РёР·Р°РІРµС‚Р°", "РћР»СЊРіР°", "Р•РєР°С‚РµСЂРёРЅР°" };
+    const char* lastNames[] = { "РљРѕРіС‚РёРЅ", "Р’Р°СЃРёРЅ", "РњРѕР»С‡СѓРЅРѕРІР°", "Р‘РѕСЂРёСЃРѕРІР°", "Р”СѓС€РєРѕРІ",
+                              "РљСѓСЂР°С‚РѕРІ", "РђСЂР±СѓР·РѕРІ", "РџРѕР·РґРЅСЏРєРѕРІ", "РЁРµРІС‡РµРЅРєРѕ", "РњР°Р»С‹С…" };
+    const char* patronymics[] = { "РћР»РµРіРѕРІРёС‡", "Р’РёРєС‚РѕСЂРѕРІРёС‡", "Р’Р»Р°РґРёРјРёСЂРѕРІРЅР°", "РРіРѕСЂРµРІРЅР°", "РќРёРєРёС‚РёС‡",
+                                "РњР°РєСЃРёРјРѕРІРёС‡", "Р”РјРёС‚СЂРёРµРІРёС‡", "Р’Р°СЃРёР»СЊРµРІРЅР°", "Р­РґСѓР°СЂРґРѕРІРёС‡" };
+    const char* positions[] = { "РњРµРЅРµРґР¶РµСЂ", "РџСЂРѕРіСЂР°РјРјРёСЃС‚", "Р‘СѓС…РіР°Р»С‚РµСЂ", "Р”РёР·Р°Р№РЅРµСЂ",
+                              "РђРЅР°Р»РёС‚РёРє", "РўРµСЃС‚РёСЂРѕРІС‰РёРє", "РђРґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂ", "Р”РёСЂРµРєС‚РѕСЂ",
+                              "РњР°СЂРєРµС‚РѕР»РѕРі", "РљРѕРЅСЃСѓР»СЊС‚Р°РЅС‚" };
 
     int firstNamesCount = sizeof(firstNames) / sizeof(firstNames[0]);
     int lastNamesCount = sizeof(lastNames) / sizeof(lastNames[0]);
@@ -65,7 +65,7 @@ int fill_arr_random(employee_t* employees, int size) {
 
 void print_array(employee_t* employees, int size) {
     if (size == 0) {
-        printf("Массив пуст.\n");
+        printf("РњР°СЃСЃРёРІ РїСѓСЃС‚.\n");
         return;
     }
     for (int i = 0; i < size; i++) {
@@ -130,12 +130,12 @@ int compare_salaries(employee_t* emp1, employee_t* emp2) {
 int sort_array(employee_t* employees, int size) {
     if (employees == NULL || size <= 0) return 0;
 
-    // Сортировка пузырьком
+    // РЎРѕСЂС‚РёСЂРѕРІРєР° РїСѓР·С‹СЂСЊРєРѕРј
     for (int i = 0; i < size - 1; i++) {
         for (int j = 0; j < size - i - 1; j++) {
-            // Используем функцию compare_salaries для сравнения зарплат
+            // РСЃРїРѕР»СЊР·СѓРµРј С„СѓРЅРєС†РёСЋ compare_salaries РґР»СЏ СЃСЂР°РІРЅРµРЅРёСЏ Р·Р°СЂРїР»Р°С‚
             if (compare_salaries(&employees[j], &employees[j + 1]) > 0) {
-                // Меняем местами
+                // РњРµРЅСЏРµРј РјРµСЃС‚Р°РјРё
                 employee_t temp = employees[j];
                 employees[j] = employees[j + 1];
                 employees[j + 1] = temp;
@@ -217,13 +217,13 @@ int find_born_in_may(employee_t* employees, int size, int* found_indices, int* f
 int winter_file() {
     FILE* input_file = fopen(WINTER_FILE, "r");
     if (input_file == NULL) {
-        printf("Не удалось открыть файл '%s' для чтения.\n", WINTER_FILE);
+        printf("РќРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РєСЂС‹С‚СЊ С„Р°Р№Р» '%s' РґР»СЏ С‡С‚РµРЅРёСЏ.\n", WINTER_FILE);
         return 0;
     }
 
     FILE* output_file = fopen(WINTER_NEW_FILE, "w");
     if (output_file == NULL) {
-        printf("Не удалось открыть файл '%s' для записи.\n", WINTER_NEW_FILE);
+        printf("РќРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РєСЂС‹С‚СЊ С„Р°Р№Р» '%s' РґР»СЏ Р·Р°РїРёСЃРё.\n", WINTER_NEW_FILE);
         fclose(input_file);
         return 0;
     }
@@ -231,7 +231,7 @@ int winter_file() {
     char line[MAX_LINE_LENGTH];
     int line_number = 0;
 
-    printf("Исходное содержимое:\n");
+    printf("РСЃС…РѕРґРЅРѕРµ СЃРѕРґРµСЂР¶РёРјРѕРµ:\n");
 
 
     while (fgets(line, sizeof(line), input_file) != NULL) {
@@ -254,7 +254,7 @@ int winter_file() {
     fclose(output_file);
 
 
-    printf("\nОбработанное содержимое (из файла '%s'):\n", WINTER_NEW_FILE);
+    printf("\nРћР±СЂР°Р±РѕС‚Р°РЅРЅРѕРµ СЃРѕРґРµСЂР¶РёРјРѕРµ (РёР· С„Р°Р№Р»Р° '%s'):\n", WINTER_NEW_FILE);
 
 
     output_file = fopen(WINTER_NEW_FILE, "r");
