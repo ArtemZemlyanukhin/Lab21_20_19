@@ -133,9 +133,7 @@ int sort_array(employee_t* employees, int size) {
     // Сортировка пузырьком
     for (int i = 0; i < size - 1; i++) {
         for (int j = 0; j < size - i - 1; j++) {
-            // Используем функцию compare_salaries для сравнения зарплат
             if (compare_salaries(&employees[j], &employees[j + 1]) > 0) {
-                // Меняем местами
                 employee_t temp = employees[j];
                 employees[j] = employees[j + 1];
                 employees[j + 1] = temp;
