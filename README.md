@@ -89,7 +89,7 @@ src/
 ```bash
 # 1. Клонирование репозитория (если есть)
 git clone [URL-репозитория]
-cd cornice-db
+cd lab19_20_21
 
 # 2. Компиляция всех файлов
 gcc -std=c99 -o lab19_20_21.c functions.c
