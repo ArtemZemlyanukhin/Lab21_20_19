@@ -1,10 +1,10 @@
-﻿#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include <locale.h>
 #include "functions.h"
-#define MAX_SIZE 100
+#define MAX_SIZE 50
 #define FILENAME "employees.txt"
 #define WINTER_FILE "winter.txt"
 #define WINTER_NEW_FILE "winter_new.txt"
