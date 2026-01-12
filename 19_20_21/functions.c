@@ -44,7 +44,6 @@ int fill_arr_random(employee_t* employees, int size) {
                               "Аналитик", "Тестировщик", "Администратор", "Директор",
                               "Маркетолог", "Консультант" };
 
-    // ИСПРАВЛЕНО: правильный расчет размера массивов
     int firstNamesCount = sizeof(firstNames) / sizeof(firstNames[0]);
     int lastNamesCount = sizeof(lastNames) / sizeof(lastNames[0]);
     int patronymicsCount = sizeof(patronymics) / sizeof(patronymics[0]);
@@ -121,7 +120,6 @@ int search_by_salary(employee_t* employees, int size, int salary, int* found_ind
     return 1;
 }
 
-// ИСПРАВЛЕННАЯ ФУНКЦИЯ: теперь принимает const void* для работы с qsort
 int compare_salaries(const void* a, const void* b) {
     const employee_t* emp1 = (const employee_t*)a;
     const employee_t* emp2 = (const employee_t*)b;
@@ -131,7 +129,6 @@ int compare_salaries(const void* a, const void* b) {
     return 0;
 }
 
-// ИСПРАВЛЕННАЯ ФУНКЦИЯ: теперь использует qsort вместо пузырьковой сортировки
 int sort_array(employee_t* employees, int size) {
     if (employees == NULL || size <= 0) return 0;
 
