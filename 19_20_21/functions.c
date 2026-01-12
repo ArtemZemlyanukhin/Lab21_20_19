@@ -5,7 +5,7 @@
 #include <time.h>
 #include <locale.h>
 #include "functions.h"
-#define MAX_SIZE 100
+#define MAX_SIZE 50
 #define FILENAME "employees.txt"
 #define WINTER_FILE "winter.txt"
 #define WINTER_NEW_FILE "winter_new.txt"
@@ -44,6 +44,7 @@ int fill_arr_random(employee_t* employees, int size) {
                               "Аналитик", "Тестировщик", "Администратор", "Директор",
                               "Маркетолог", "Консультант" };
 
+    // ИСПРАВЛЕНО: правильный расчет размера массивов
     int firstNamesCount = sizeof(firstNames) / sizeof(firstNames[0]);
     int lastNamesCount = sizeof(lastNames) / sizeof(lastNames[0]);
     int patronymicsCount = sizeof(patronymics) / sizeof(patronymics[0]);
@@ -73,7 +74,6 @@ void print_array(employee_t* employees, int size) {
             employees[i].lastName, employees[i].firstName, employees[i].patronymic,
             employees[i].position, employees[i].salary, employees[i].birthDate);
     }
-
 }
 
 int search_by_lastname(employee_t* employees, int size, char* lastName, int* found_indices, int* found_count) {
@@ -121,25 +121,22 @@ int search_by_salary(employee_t* employees, int size, int salary, int* found_ind
     return 1;
 }
 
-int compare_salaries(employee_t* emp1, employee_t* emp2) {
+// ИСПРАВЛЕННАЯ ФУНКЦИЯ: теперь принимает const void* для работы с qsort
+int compare_salaries(const void* a, const void* b) {
+    const employee_t* emp1 = (const employee_t*)a;
+    const employee_t* emp2 = (const employee_t*)b;
+
     if (emp1->salary < emp2->salary) return -1;
     if (emp1->salary > emp2->salary) return 1;
     return 0;
 }
 
+// ИСПРАВЛЕННАЯ ФУНКЦИЯ: теперь использует qsort вместо пузырьковой сортировки
 int sort_array(employee_t* employees, int size) {
     if (employees == NULL || size <= 0) return 0;
 
-    // Сортировка пузырьком
-    for (int i = 0; i < size - 1; i++) {
-        for (int j = 0; j < size - i - 1; j++) {
-            if (compare_salaries(&employees[j], &employees[j + 1]) > 0) {
-                employee_t temp = employees[j];
-                employees[j] = employees[j + 1];
-                employees[j + 1] = temp;
-            }
-        }
-    }
+    // Используем стандартную функцию qsort с нашей функцией сравнения
+    qsort(employees, size, sizeof(employee_t), compare_salaries);
 
     return 1;
 }
@@ -231,19 +228,15 @@ int winter_file() {
 
     printf("Исходное содержимое:\n");
 
-
     while (fgets(line, sizeof(line), input_file) != NULL) {
         line_number++;
-
 
         size_t len = strlen(line);
         if (len > 0 && line[len - 1] == '\n') {
             line[len - 1] = '\0';
         }
 
-
         printf("%s\n", line);
-
 
         fprintf(output_file, "!%s\n", line);
     }
@@ -251,9 +244,7 @@ int winter_file() {
     fclose(input_file);
     fclose(output_file);
 
-
     printf("\nОбработанное содержимое (из файла '%s'):\n", WINTER_NEW_FILE);
-
 
     output_file = fopen(WINTER_NEW_FILE, "r");
     if (output_file != NULL) {
